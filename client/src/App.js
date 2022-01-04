@@ -46,9 +46,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        { data && data.map((todo, index) => {
+        <div className="todos-wrapper">
+          { data && data.map((todo, index) => {
             return <Todo todo={todo} key={index} onClick={handleUpdateTodoStatus} onSubmit={handleUpdateTodoStatus}/>
-        })}
+          })}
+        </div>
         <CreateTodo onSubmit={handleCreateTodo}/>
       </header>
     </div>
