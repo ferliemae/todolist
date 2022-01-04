@@ -1,1 +1,9 @@
+input {
+    font-size: calc(10px + 2vmin);
+    background: none;
+    border: none;
+    color: white;
+    border-bottom: 1px solid gray;
+}
+input:focus-visible { outline: none; }
 .completed { text-decoration: line-through; }

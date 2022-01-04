@@ -24,4 +24,29 @@ router.route('/')
     })
   })
 
+router.route('/:todo_id')
+  .get((req, res) => {
+      Todo.findById(req.params.todo_id, (err, todo) => {
+          if (err)
+            res.send(err);
+          res.json(todo);
+      })
+  })
+  .put((req, res) => {
+      Todo.findById(req.params.todo_id, (err, todo) => {
+          if (err)
+            res.send(err);
+          console.log(req.body)
+          todo.description = req.body.description;
+          todo.completed = req.body.completed;
+
+          todo.save(err => {
+              if (err)
+                res.send(err);
+
+              res.json({message: 'Todo updated!'});
+          })
+      })
+  })
+
 module.exports = router;
