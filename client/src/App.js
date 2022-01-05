@@ -35,9 +35,7 @@ function App() {
   }
 
   function handleDeleteTodo(todo) {
-    fetch(`/api/todos/${todo._id}`, {
-      method: 'DELETE',
-    })
+    fetch(`/api/todos/${todo._id}`, {method: 'DELETE'})
       .then(res => getTodos());
   }
 

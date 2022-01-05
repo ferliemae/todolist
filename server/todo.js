@@ -8,17 +8,14 @@ router.route('/')
     var todo = new Todo({description: description, completed: completed});
 
     todo.save(function(err) {
-      if (err)
-        res.send(err);
+      if (err) res.send(err);
 
       res.json({ message: 'Todo created!' });
     });
   })
   .get(function(req, res) {
     Todo.find(function(err, todos) {
-      if (err) {
-        res.send(err);
-      }
+      if (err) res.send(err);
 
       res.json(todos);
     })
@@ -27,22 +24,20 @@ router.route('/')
 router.route('/:todo_id')
   .get((req, res) => {
       Todo.findById(req.params.todo_id, (err, todo) => {
-          if (err)
-            res.send(err);
+          if (err) res.send(err);
+
           res.json(todo);
       })
   })
   .put((req, res) => {
       Todo.findById(req.params.todo_id, (err, todo) => {
-          if (err)
-            res.send(err);
-          console.log(req.body)
+          if (err) res.send(err);
+
           todo.description = req.body.description;
           todo.completed = req.body.completed;
 
           todo.save(err => {
-              if (err)
-                res.send(err);
+              if (err) res.send(err);
 
               res.json({message: 'Todo updated!'});
           })
@@ -50,8 +45,7 @@ router.route('/:todo_id')
   })
   .delete((req, res) => {
     Todo.remove({_id: req.params.todo_id}, (err, todo) => {
-      if (err)
-        res.send(err)
+      if (err) res.send(err)
 
       res.json({message: 'Successfully deleted.'})
     })

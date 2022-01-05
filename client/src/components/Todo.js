@@ -1,6 +1,7 @@
 import React from "react";
 import "./Todo.css";
 import { FaTrashAlt } from "react-icons/fa";
+
 class Todo extends React.Component {
     constructor(props) {
         super(props);

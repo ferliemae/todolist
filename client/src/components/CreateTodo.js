@@ -25,7 +25,13 @@ class CreateTodo extends React.Component {
 
     render() {
         return ( this.state.isCreating
-            ? <input autoFocus type="text" value={this.state.todo} onKeyPress={(e) => this.onKeyUp(e)} onChange={(e) => this.handleChange(e)}/>
+            ? <input
+                autoFocus
+                type="text"
+                value={this.state.todo}
+                onKeyPress={(e) => this.onKeyUp(e)}
+                onChange={(e) => this.handleChange(e)}
+              />
             : <div onClick={() => this.onClick()}>+</div>
         );
     }
