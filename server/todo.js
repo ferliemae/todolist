@@ -48,5 +48,13 @@ router.route('/:todo_id')
           })
       })
   })
+  .delete((req, res) => {
+    Todo.remove({_id: req.params.todo_id}, (err, todo) => {
+      if (err)
+        res.send(err)
+
+      res.json({message: 'Successfully deleted.'})
+    })
+  })
 
 module.exports = router;

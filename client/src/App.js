@@ -19,9 +19,7 @@ function App() {
         "accept": "application/json"
       },
     })
-      .then(res => {
-        getTodos();
-      })
+      .then(res => getTodos());
   }
 
   function handleCreateTodo(todo) {
@@ -33,10 +31,16 @@ function App() {
         "accept": "application/json"
       },
     })
-      .then(res => {
-        getTodos();
-      })
+      .then(res => getTodos());
   }
+
+  function handleDeleteTodo(todo) {
+    fetch(`/api/todos/${todo._id}`, {
+      method: 'DELETE',
+    })
+      .then(res => getTodos());
+  }
+
   function getTodos() {
     fetch("/api/todos")
     .then((res) => res.json())
@@ -48,7 +52,13 @@ function App() {
       <header className="App-header">
         <div className="todos-wrapper">
           { data && data.map((todo, index) => {
-            return <Todo todo={todo} key={index} onClick={handleUpdateTodoStatus} onSubmit={handleUpdateTodoStatus}/>
+            return <Todo
+              todo={todo}
+              key={index}
+              onClick={handleUpdateTodoStatus}
+              onSubmit={handleUpdateTodoStatus}
+              onDelete={handleDeleteTodo}
+            />
           })}
         </div>
         <CreateTodo onSubmit={handleCreateTodo}/>

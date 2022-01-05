@@ -5,5 +5,20 @@ input {
     color: white;
     border-bottom: 1px solid gray;
 }
-input:focus-visible { outline: none; }
-.completed { text-decoration: line-through; }
+input:focus-visible {
+    outline: none;
+}
+input[type=checkbox] {
+    transform: scale(1.5);
+    margin-right: 12px;
+}
+.completed {
+    text-decoration: line-through;
+}
+.delete-button {
+    height: 20px;
+    margin-left: 8px;
+}
+.delete-button:hover {
+    cursor: pointer;
+}
