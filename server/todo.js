@@ -4,13 +4,13 @@ var Todo    = require('./app/models/todo');
 
 router.route('/')
   .post(function(req, res) {
-    const { description, completed } = req.body;
-    var todo = new Todo({description: description, completed: completed});
+    const { description, completed, priority } = req.body;
+    var todo = new Todo({description: description, completed: completed, priority: priority});
 
-    todo.save(function(err) {
+    todo.save(function(err, todo) {
       if (err) res.send(err);
 
-      res.json({ message: 'Todo created!' });
+      res.json(todo);
     });
   })
   .get(function(req, res) {
@@ -35,19 +35,22 @@ router.route('/:todo_id')
 
           todo.description = req.body.description;
           todo.completed = req.body.completed;
+          todo.priority = req.body.priority;
 
-          todo.save(err => {
+          todo.save((err, saved) => {
               if (err) res.send(err);
 
+              console.log(saved)
               res.json({message: 'Todo updated!'});
           })
       })
   })
   .delete((req, res) => {
-    Todo.remove({_id: req.params.todo_id}, (err, todo) => {
+     const { todo_id } = req.params;
+    Todo.remove({_id: todo_id}, (err, todo) => {
       if (err) res.send(err)
 
-      res.json({message: 'Successfully deleted.'})
+      res.json({id: todo_id})
     })
   })
 

@@ -16,9 +16,16 @@ input[type=checkbox] {
     text-decoration: line-through;
 }
 .delete-button {
-    height: 20px;
-    margin-left: 8px;
+    height: 18px;
 }
 .delete-button:hover {
     cursor: pointer;
 }
+.priority-icon {
+    margin-left: 8px;
+    height: 20px;
+}
+.high { color: rgb(244, 67, 54); }
+.medium { color: rgb(255, 193, 7); }
+.low { color: rgb(76, 175, 80); }
+.menu-item > span { margin-left: 10px}

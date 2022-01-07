@@ -1,67 +1,22 @@
 import React from "react";
 import "./App.css";
 import Todo from './components/Todo';
-import CreateTodo from "./components/CreateTodo";
+import CreateTodo from './components/CreateTodo';
+import TodoList from './components/TodoList';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    getTodos();
-  }, []);
-
-  function handleUpdateTodoStatus(todo) {
-    fetch(`/api/todos/${todo._id}`, {
-      method: 'PUT',
-      body: JSON.stringify({completed: todo.completed, description: todo.description}),
-      headers: {
-        "content-type": "application/json",
-        "accept": "application/json"
-      },
-    })
-      .then(res => getTodos());
-  }
-
-  function handleCreateTodo(todo) {
-    fetch('/api/todos', {
-      method: 'POST',
-      body: JSON.stringify({completed: todo.completed, description: todo.description}),
-      headers: {
-        "content-type": "application/json",
-        "accept": "application/json"
-      },
-    })
-      .then(res => getTodos());
-  }
-
-  function handleDeleteTodo(todo) {
-    fetch(`/api/todos/${todo._id}`, {method: 'DELETE'})
-      .then(res => getTodos());
-  }
-
-  function getTodos() {
-    fetch("/api/todos")
-    .then((res) => res.json())
-    .then((data) => setData(data));
-  }
-
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="App">
       <header className="App-header">
-        <div className="todos-wrapper">
-          { data && data.map((todo, index) => {
-            return <Todo
-              todo={todo}
-              key={index}
-              onClick={handleUpdateTodoStatus}
-              onSubmit={handleUpdateTodoStatus}
-              onDelete={handleDeleteTodo}
-            />
-          })}
-        </div>
-        <CreateTodo onSubmit={handleCreateTodo}/>
+        <TodoList />
+        <CreateTodo />
       </header>
     </div>
+    </QueryClientProvider>
   );
 }
 
