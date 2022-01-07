@@ -11,7 +11,7 @@ function useUpdateTodo() {
             return queryCache.setQueryData(getKeyGetTodos({}), todos => {
                 return todos?.map((todo) => {
                     if (todo._id === params.todo_id) {
-                        return { ...params.data };
+                        return { _id: params.todo_id, ...params.data };
                     }
 
                     return todo;
